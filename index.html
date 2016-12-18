@@ -1,0 +1,58 @@
+<!-- AJAX GET REQUEST. -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>AJAX Request</title>
+    <script src="js/jquery-3.1.1.js">
+
+    </script>
+  </head>
+  <body>
+    <!-- 2 Inputs markup -->
+    <input type="text" id="client-field" placeholder="Enter Something">
+    <br>
+    <br>
+    <input type="text" id="server-response" placeholder="Server Response">
+  </body>
+
+  <script type="text/javascript">
+  // caching the client input field
+  var client_field = $('#client-field');
+
+  // adding event listenter on client input field
+  //making a ajax request at every keyup
+// ---------------------GET REQUEST---------------------
+
+	// client_field.on("keyup",function(){
+  //   var text = $(this).val();
+  // $.get('response.php','text='+text,function(response_data,status,XMLHttpRequest){
+  //   $('#server-response').val(response_data);
+  // },"text");
+  // });
+
+  // --------------------POST REQUEST---------------------
+  // client_field.on("keyup",function(){
+  //   var text = $(this).val();
+  // $.post('responsePOST.php','text='+text,function(response_data,status,XMLHttpRequest){
+  //   $('#server-response').val(response_data);
+  // },"text");
+  // });
+
+  //-----------------------AJAX GENERAL---------------------
+  client_field.on("keyup",function(){
+    var text = $(this).val();
+  $.ajax({
+    url: "response.php", //url:"responsePOST.php",
+    data:"text="+text,
+    type:"GET", //type:"POST",
+    beforeSend: function(http){alert('Before send alert')},  //Function that runs before sending the request
+    success:function(response,status,http){$('#server-response').val(response);},  //Function that runs on success of request
+    error:function(http,status,error){alert("some error "+error)} //Function that runs if there is some error
+  });
+  });
+
+
+  </script>
+</html>
